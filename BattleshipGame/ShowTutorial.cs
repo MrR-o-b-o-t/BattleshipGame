@@ -32,6 +32,7 @@ namespace BattleshipGame
             Console.WriteLine("");
             Console.WriteLine("Press any key to fire up the boilers and ship off!");
             Console.ReadKey();
+            Console.Clear();
         }
     }
 }
