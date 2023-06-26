@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleshipGame
 {
@@ -17,16 +13,17 @@ namespace BattleshipGame
             Console.WriteLine();
 
             PrintGameBoard printGameBoard = new PrintGameBoard();
-            printGameBoard.PrintNewGameBoard();
+            int[,] gameBoard = new int[10, 10]; // Create an empty game board
+            printGameBoard.PrintNewGameBoard(gameBoard);
 
             Console.WriteLine();
             Console.WriteLine();
 
             Console.WriteLine("Once the point is selected you will be prompted with a hit or miss.");
             Console.WriteLine("You will be given a total of 8 guesses. If you do not destroy the enemy vessel...");
-            Console.WriteLine("You are porbably fit for the 1588 Spanish Armada and lose the game.");
-            Console.WriteLine("However, if you annihalate the enemy, which takes up 5 grid spaces, you win!.");
-            Console.WriteLine("After which you can gloat to your firends and family, and garner the respect of your peers.");
+            Console.WriteLine("You are probably fit for the 1588 Spanish Armada and lose the game.");
+            Console.WriteLine("However, if you annihilate the enemy, which takes up 5 grid spaces, you win!.");
+            Console.WriteLine("After which you can gloat to your friends and family, and garner the respect of your peers.");
 
             Console.WriteLine("*********************************************************************************************************************");
             Console.WriteLine("");

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleshipGame
 {
@@ -10,32 +6,76 @@ namespace BattleshipGame
     {
         public void RunNewGame()
         {
-            var shots = 0;
+            int shipLocationX = 10;
+            int shipLocationY = 5;
+
+            var shots = 8;
             var hits = 0;
             var misses = 0;
             var userX = "";
             var userY = "";
 
-            Console.WriteLine($"Shots Remaining = {shots} Hits = {hits} Misses = {misses}");
-            for (int i = 10; i >= 0; i--)
+            int[,] gameBoard = new int[10, 10];
+
+            while (shots > 0 && hits < 2)
             {
-                if (i == 10)
+                Console.WriteLine($"Shots Remaining = {shots} Hits = {hits} Misses = {misses}");
+
+                PrintGameBoard printGameBoard = new PrintGameBoard();
+                printGameBoard.PrintNewGameBoard(gameBoard);
+
+                Console.WriteLine();
+                Console.Write("(X-axis) - Select a spot [1-10] to fire on: ");
+                userX = Console.ReadLine();
+                var userXNum = int.Parse(userX);
+
+                Console.Write("(Y-axis) - Select a spot [1-10] to fire on: ");
+                userY = Console.ReadLine();
+                var userYNum = int.Parse(userY);
+
+                bool isHit = isMatch(userXNum, userYNum, shipLocationX, shipLocationY);
+                shots--;
+
+                if (isHit)
                 {
-                    Console.WriteLine($"{i} -  -  -  -  -  -  -  -  -  -");
+                    hits++;
+                    gameBoard[userYNum, userXNum] = 1;
                 }
                 else
                 {
-                    Console.WriteLine($"{i}  -  -  -  -  -  -  -  -  -  -");
+                    misses++;
+                    gameBoard[userYNum, userXNum] = -1;
                 }
 
+                Console.Clear();
             }
 
-            Console.WriteLine($"0  1  2  3  4  5  6  7  8  9  10");
-            Console.WriteLine();
-            Console.Write("(X-axis) - Select a spot [1-10] to fire on: ");
-            userX = Console.ReadLine();
-            Console.Write("(Y-axis) - Select a spot [1-10] to fire on: ");
-            userY = Console.ReadLine();
+            // Method to check for hit or miss
+            bool isMatch(int userXNum, int userYNum, int shipLocationX, int shipLocationY)
+            {
+                if (userXNum == shipLocationX && userYNum == shipLocationY)
+                {
+                    Console.WriteLine("Hit!");
+                    Console.WriteLine();
+                    Console.WriteLine("Press Enter to resume!");
+                    Console.ReadKey();
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Miss!");
+                    Console.WriteLine();
+                    Console.WriteLine("Press Enter to resume!");
+                    Console.ReadKey();
+                    return false;
+                }
+            }
+
+            if (hits == 2)
+            {
+                Console.WriteLine("You win! Press any key to continue.");
+                Console.ReadKey();
+            }
         }
     }
 }

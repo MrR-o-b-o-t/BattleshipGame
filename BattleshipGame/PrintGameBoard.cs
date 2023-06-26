@@ -1,29 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BattleshipGame
 {
     internal class PrintGameBoard
     {
-        public void PrintNewGameBoard()
+        public void PrintNewGameBoard(int[,] board)
         {
-            for (int i = 10; i >= 0; i--)
+            var myLabel = 10;
+
+            for (int row = 0; row < 10; row++)
             {
-                if (i == 10)
+                Console.Write((myLabel));
+                myLabel--;
+
+                for (int col = 0; col < 10; col++)
                 {
-                    Console.WriteLine($"{i} -  -  -  -  -  -  -  -  -  -");
-                }
-                else
-                {
-                    Console.WriteLine($"{i}  -  -  -  -  -  -  -  -  -  -");
+                    if (board[row, col] == 1)
+                    {
+                        Console.Write(" X ");
+                    }
+                    else if (board[row, col] == -1)
+                    {
+                        Console.Write(" O ");
+                    }
+                    else
+                    {
+                        Console.Write(" - ");
+                    }
                 }
 
+                Console.WriteLine();
             }
-
-            Console.WriteLine($"0  1  2  3  4  5  6  7  8  9  10");
+            Console.WriteLine("0  1  2  3  4  5  6  7  8  9  10");
         }
     }
 }
