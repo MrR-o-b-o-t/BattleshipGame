@@ -6,24 +6,22 @@ namespace BattleshipGame
     {
         public void RunNewGame()
         {
-            int shipLocationX = 10;
-            int shipLocationY = 5;
+            int[,] shipBoard = GenerateShipLocation.GenerateShipLocations();
 
-            var shots = 8;
-            var hits = 0;
-            var misses = 0;
+            int shots = 8;
+            int hits = 0;
+            int misses = 0;
             var userX = "";
             var userY = "";
 
             int[,] gameBoard = new int[10, 10];
 
-            while (shots > 0 && hits < 2)
+            while (shots > 0 && hits < 5)
             {
                 Console.WriteLine($"Shots Remaining = {shots} Hits = {hits} Misses = {misses}");
 
                 PrintGameBoard printGameBoard = new PrintGameBoard();
                 printGameBoard.PrintNewGameBoard(gameBoard);
-
                 Console.WriteLine();
                 Console.Write("(X-axis) - Select a spot [1-10] to fire on: ");
                 userX = Console.ReadLine();
@@ -33,27 +31,29 @@ namespace BattleshipGame
                 userY = Console.ReadLine();
                 var userYNum = int.Parse(userY);
 
-                bool isHit = isMatch(userXNum, userYNum, shipLocationX, shipLocationY);
+                bool isHit = isMatch(userXNum, userYNum, shipBoard);
                 shots--;
 
                 if (isHit)
                 {
+                    userYNum--;
+                    userXNum--;
                     hits++;
-                    gameBoard[userYNum, userXNum] = 1;
+                    gameBoard[userYNum, userXNum] = 1; // Update gameBoard with hit
                 }
                 else
                 {
                     misses++;
-                    gameBoard[userYNum, userXNum] = -1;
+                    gameBoard[userYNum - 1, userXNum - 1] = -1; // Update gameBoard with miss
                 }
 
                 Console.Clear();
             }
 
             // Method to check for hit or miss
-            bool isMatch(int userXNum, int userYNum, int shipLocationX, int shipLocationY)
+            bool isMatch(int userXNum, int userYNum, int[,] shipBoard)
             {
-                if (userXNum == shipLocationX && userYNum == shipLocationY)
+                if (shipBoard[userYNum - 1, userXNum - 1] == 1)
                 {
                     Console.WriteLine("Hit!");
                     Console.WriteLine();
@@ -71,7 +71,7 @@ namespace BattleshipGame
                 }
             }
 
-            if (hits == 2)
+            if (hits == 5)
             {
                 Console.WriteLine("You win! Press any key to continue.");
                 Console.ReadKey();

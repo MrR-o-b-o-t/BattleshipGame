@@ -13,7 +13,7 @@ namespace BattleshipGame
             Console.WriteLine();
 
             PrintGameBoard printGameBoard = new PrintGameBoard();
-            int[,] gameBoard = new int[10, 10]; // Create an empty game board
+            int[,] gameBoard = new int[10, 10]; 
             printGameBoard.PrintNewGameBoard(gameBoard);
 
             Console.WriteLine();

@@ -4,34 +4,41 @@ namespace BattleshipGame
 {
     internal class PrintGameBoard
     {
-        public void PrintNewGameBoard(int[,] board)
+public void PrintNewGameBoard(int[,] board)
+{
+
+    for (int row = 9; row >= 0; row--)
+    {
+        Console.Write((row + 1).ToString().PadRight(2));
+
+        for (int col = 0; col < 10; col++)
         {
-            var myLabel = 10;
+            int cellValue = board[row, col];
+            char displayChar;
 
-            for (int row = 0; row < 10; row++)
+            switch (cellValue)
             {
-                Console.Write((myLabel));
-                myLabel--;
-
-                for (int col = 0; col < 10; col++)
-                {
-                    if (board[row, col] == 1)
-                    {
-                        Console.Write(" X ");
-                    }
-                    else if (board[row, col] == -1)
-                    {
-                        Console.Write(" O ");
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-
-                Console.WriteLine();
+                case 0:
+                    displayChar = '-';
+                    break;
+                case 1:
+                    displayChar = 'X';
+                    break;
+                case -1:
+                    displayChar = 'O';
+                    break;
+                default:
+                    displayChar = '-';
+                    break;
             }
-            Console.WriteLine("0  1  2  3  4  5  6  7  8  9  10");
+
+            Console.Write($" {displayChar} ");
         }
+
+        Console.WriteLine("");
+    }
+
+    Console.WriteLine("0  1  2  3  4  5  6  7  8  9  10");
+}
     }
 }
