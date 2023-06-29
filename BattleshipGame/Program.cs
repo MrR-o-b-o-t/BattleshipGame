@@ -13,15 +13,34 @@ namespace BattleshipGame
             showTutorial.ShowTutorialScreen();
 
             Console.WriteLine("Do you want to play battleship? (Y or N)");
-
             var playGame = Console.ReadLine().ToLower();
-            while (playGame == "y")
+            
+            while (playGame != "y" && playGame != "n")
             {
-                if (playGame == "y")
+                Console.WriteLine("Invalid input. Please enter a valid response.");
+                playGame = Console.ReadLine();
+                continue;
+            }
+
+            var playGameResponse = playGame;
+
+            while (playGameResponse == "y")
+            {
+                if (playGameResponse == "y")
                 {
                     Console.Clear();
                     Console.WriteLine("Do you want to a quick tutorial? (Y or N)");
-                    var playTutorial = Console.ReadLine();
+                    var playTutorial = Console.ReadLine().ToLower();
+
+                while (playTutorial != "y" && playTutorial != "n")
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid response.");
+                    playTutorial = Console.ReadLine();
+                    continue;
+                }
+
+                    var playTutorialResponse = playTutorial;
+
                     if (playTutorial == "y")
                     {
                         Console.Clear();
@@ -33,7 +52,7 @@ namespace BattleshipGame
                         runGame.RunNewGame();
                         Console.Clear();
                         Console.WriteLine("Do you want to play again? (Y or N)");
-                        playGame = Console.ReadLine().ToLower();
+                        playGameResponse = Console.ReadLine().ToLower();
                     }
                 }
             }
