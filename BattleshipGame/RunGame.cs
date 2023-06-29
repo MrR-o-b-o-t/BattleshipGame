@@ -81,12 +81,12 @@ namespace BattleshipGame
 
                         if(input == "y")
                         {
-                            restart = true;
                             continueGame = false;
                             Console.Clear();
                         } else
                         {
                             restart = false;
+                            break;
                         }
                     }
 
